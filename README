@@ -1,13 +1,18 @@
 Lucy
 ====
 
-Introduction goes here.
+Lucy in the sky with rubies.
 
 
 Example
 =======
 
-Example goes here.
+#Ruby
+Lucy.generate("horses", [{:name => "Gone with the Wind", :color => "Blue"}, {:name => "Powerade Powell", :color => "Pink"}]);
+
+//JS
+Lucy.horses[0].name
+=> "Gone with the Wind"
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+Copyright (c) 2008 Tore Darell, released under the MIT license
