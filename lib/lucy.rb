@@ -5,8 +5,8 @@ module Lucy
   DEFAULT_GLOBAL = "window"
 
 
-  def self.generate(key, content=nil)
-    File.open(File.join(JAVASCRIPT_DIR, "#{key}.js"), "w") do |f|
+  def self.generate(key, content=nil, path=nil)
+    File.open(path || File.join(JAVASCRIPT_DIR, "#{key}.js"), "w") do |f|
       g = JavascriptGenerator.new
       if block_given?
         yield g
@@ -17,10 +17,14 @@ module Lucy
     end
   end
 
+  def self.file(src_path, dest_path=nil)
+    File.cp(src_path, dest_path || JAVASCRIPT_DIR)
+  end
+
 
   class JavascriptGenerator
 
-    attr_writer :namespace, :global
+    attr_writer :namespace, :global, :init_namespace
 
     def initialize
       @keyed = []
@@ -58,6 +62,10 @@ module Lucy
 
     def init_namespace
       "if (!#{global}.#{namespace}) { #{namespace} = {}; }"
+    end
+
+    def init_namespace?
+      @init_namespace.nil? ? true : @init_namespace
     end
 
   end
