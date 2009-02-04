@@ -43,7 +43,7 @@ module Lucy
     alias << write_raw
 
     def to_a
-      [init_namespace] + @keyed.map do |key, value|
+      (init_namespace? ? [init_namespace] : []) + @keyed.map do |key, value|
         "#{namespace}.#{[key].flatten.join('.')} = #{value};"
       end + @raw
     end
