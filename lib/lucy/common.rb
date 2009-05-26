@@ -11,7 +11,7 @@ module Lucy
       unless Rails.env.production? && Thread.current[:common_javascript_generated]
         Lucy.generate "common" do |g|
           g.namespace = "Rails"
-          g[:authenticityToken] = form_authenticity_token
+          g[:authenticityToken] = protect_against_forgery? ? form_authenticity_token : nil
           g[:env] = Rails.env
           g[:version] = Rails.version
         end
