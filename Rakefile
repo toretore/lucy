@@ -21,3 +21,17 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+require 'jeweler'
+Jeweler::Tasks.new do |gem|
+  # gem is a Gem::Specification. See http://docs.rubygems.org/read/chapter/20 for more options
+  gem.name = "lucy"
+  gem.homepage = "http://github.com/toretore/lucy"
+  gem.license = "MIT"
+  gem.summary = %Q{Rails plugin for generating javascript files from Ruby objects}
+  gem.description = gem.summary
+  gem.email = ""
+  gem.authors = ["Tore Darell"]
+  gem.add_development_dependency 'activesupport'
+end
+Jeweler::RubygemsDotOrgTasks.new

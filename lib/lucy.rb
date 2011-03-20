@@ -1,12 +1,14 @@
 module Lucy
 
-  JAVASCRIPT_DIR = File.join(File.dirname(__FILE__), "..", "..", "..", "..", "public", "javascripts")
   DEFAULT_NAMESPACE = "Lucy"
   DEFAULT_GLOBAL = "window"
 
+  def self.javascript_dir
+    @js_dir ||= File.join(Rails.root, "public", "javascripts")
+  end
 
   def self.generate(key, content=nil, path=nil)
-    File.open(path || File.join(JAVASCRIPT_DIR, "#{key}.js"), "w") do |f|
+    File.open(path || File.join(javascript_dir, "#{key}.js"), "w") do |f|
       g = JavascriptGenerator.new
       if block_given?
         yield g
@@ -18,7 +20,7 @@ module Lucy
   end
 
   def self.file(src_path, dest_path=nil)
-    File.cp(src_path, dest_path || JAVASCRIPT_DIR)
+    File.cp(src_path, dest_path || javascript_dir)
   end
 
 
