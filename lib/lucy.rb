@@ -4,7 +4,12 @@ module Lucy
   DEFAULT_GLOBAL = "window"
 
   def self.javascript_dir
-    @js_dir ||= File.join(Rails.root, "public", "javascripts")
+    assets_dir = File.join( Rails.root, 'app', 'assets', 'javascripts' )
+    if Dir.exists?( assets_dir )
+      @js_dir ||= assets_dir
+    else
+      @js_dir ||= File.join(Rails.root, "public", "javascripts")
+    end
   end
 
   def self.generate(key, content=nil, path=nil)
